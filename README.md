@@ -187,6 +187,24 @@ I created the project with `$ vue create andrea-ercolino` and renamed the root f
 - And if we were to do for star ships, vehicles, ... the same we did for planets, the UX would be richer but not slower
 
 
+### About sorting columns
+
+I won't implement this requirement because sorting paginated results without an API, which allows that with a modifier, is painful.
+
+In fact, _paginated results_ means _hold partial results_, while _sorted results_ implies _hold all results_. Given that I decided to match paginated display to paginated download, the only possible solution to sorting in the browser would require to download all pages, which defeats the pagination concept. Anyway, I can think of these alternative solutions:
+
+1. I allow to sort only after the user has managed to manually navigate through all the pages (and download all the results)
+2. I allow to sort immediately but I start a full navigation under the hood to download missing results, and (choose one):
+    1. the user keeps waiting until all the results came in, then eventually sees the first page of the sorted results
+    2. the user always sees the first page of the sorted but partially downloaded results, until no more results come in
+
+The _manual_ full download is not friendly, because it forces the user to do something that could be automated.
+
+The _automatic_ full download is not friendly, because it forces the user to wait all the time we avoided with pagination.
+
+If I had to choose, I would implement the automatic download with incremental sort (2.2 above), but I'm not that convinced because it can be confusing for the user to see all that movement in the items of the first page and that's quite a bit of added complexity, which I don't feel comfortable to implement without talking it through before.
+
+
 ## Project setup
 
 ```sh
