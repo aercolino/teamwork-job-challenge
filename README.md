@@ -56,37 +56,35 @@ I created the project with `$ vue create andrea-ercolino` and renamed the root f
 
 - The endpoint `GET /api/people/<personId>` returns a JSON response like this:
 
-```json
-{
-    "name": "Luke Skywalker",
-    "height": "172",
-    "mass": "77",
-    "hair_color": "blond",
-    "skin_color": "fair",
-    "eye_color": "blue",
-    "birth_year": "19BBY",
-    "gender": "male",
-    "homeworld": "https://swapi.dev/api/planets/1/",
-    "films": [
-        "https://swapi.dev/api/films/1/",
-        "https://swapi.dev/api/films/2/",
-        "https://swapi.dev/api/films/3/",
-        "https://swapi.dev/api/films/6/"
-    ],
-    "species": [],
-    "vehicles": [
-        "https://swapi.dev/api/vehicles/14/",
-        "https://swapi.dev/api/vehicles/30/"
-    ],
-    "starships": [
-        "https://swapi.dev/api/starships/12/",
-        "https://swapi.dev/api/starships/22/"
-    ],
-    "created": "2014-12-09T13:50:51.644000Z",
-    "edited": "2014-12-20T21:17:56.891000Z",
-    "url": "https://swapi.dev/api/people/1/"
-}
-```
+    ```json
+    {
+        "name": "Luke Skywalker",
+        "height": "172",
+        "mass": "77",
+        "hair_color": "blond",
+        "skin_color": "fair",
+        "eye_color": "blue",
+        "birth_year": "19BBY",
+        "gender": "male",
+        "homeworld": "https://swapi.dev/api/planets/1/",
+        "films": [
+            "https://swapi.dev/api/films/1/",
+            ...
+        ],
+        "species": [],
+        "vehicles": [
+            "https://swapi.dev/api/vehicles/14/",
+            ...
+        ],
+        "starships": [
+            "https://swapi.dev/api/starships/12/",
+            ...
+        ],
+        "created": "2014-12-09T13:50:51.644000Z",
+        "edited": "2014-12-20T21:17:56.891000Z",
+        "url": "https://swapi.dev/api/people/1/"
+    }
+    ```
 
 - The response to `GET /api/people/<personId>` shows that we are meant to display columns data straight from `name`, `height`, `mass`, `created`, and `edited` properties
     - As for the `Planet Name` column, we are meant to select the `homeworld` URL, make a request to the endpoint `GET /api/planets/<planetId>/`, extract the planet's name, and finally display it
@@ -96,41 +94,30 @@ I created the project with `$ vue create andrea-ercolino` and renamed the root f
 
 - The endpoint `GET /api/planets/<planetId>/` returns a JSON response like this:
 
-```json
-{
-    "name": "Tatooine",
-    "rotation_period": "23",
-    "orbital_period": "304",
-    "diameter": "10465",
-    "climate": "arid",
-    "gravity": "1 standard",
-    "terrain": "desert",
-    "surface_water": "1",
-    "population": "200000",
-    "residents": [
-        "https://swapi.dev/api/people/1/",
-        "https://swapi.dev/api/people/2/",
-        "https://swapi.dev/api/people/4/",
-        "https://swapi.dev/api/people/6/",
-        "https://swapi.dev/api/people/7/",
-        "https://swapi.dev/api/people/8/",
-        "https://swapi.dev/api/people/9/",
-        "https://swapi.dev/api/people/11/",
-        "https://swapi.dev/api/people/43/",
-        "https://swapi.dev/api/people/62/"
-    ],
-    "films": [
-        "https://swapi.dev/api/films/1/",
-        "https://swapi.dev/api/films/3/",
-        "https://swapi.dev/api/films/4/",
-        "https://swapi.dev/api/films/5/",
-        "https://swapi.dev/api/films/6/"
-    ],
-    "created": "2014-12-09T13:50:49.641000Z",
-    "edited": "2014-12-20T20:58:18.411000Z",
-    "url": "https://swapi.dev/api/planets/1/"
-}
-```
+    ```json
+    {
+        "name": "Tatooine",
+        "rotation_period": "23",
+        "orbital_period": "304",
+        "diameter": "10465",
+        "climate": "arid",
+        "gravity": "1 standard",
+        "terrain": "desert",
+        "surface_water": "1",
+        "population": "200000",
+        "residents": [
+            "https://swapi.dev/api/people/1/",
+            ...
+        ],
+        "films": [
+            "https://swapi.dev/api/films/1/",
+            ...
+        ],
+        "created": "2014-12-09T13:50:49.641000Z",
+        "edited": "2014-12-20T20:58:18.411000Z",
+        "url": "https://swapi.dev/api/planets/1/"
+    }
+    ```
 
 - The response to `GET /api/planets/<planetId>/` shows that we are meant to display data straight from `name`, `diameter`, `climate`, and `population` properties.
     - We are not required to display data of the `created` and `edited` properties here. For uniformity, I'm going to display them here too.
@@ -140,29 +127,29 @@ I created the project with `$ vue create andrea-ercolino` and renamed the root f
 
 - The endpoint `GET /api/people` returns a JSON response like this:
 
-```json
-{
-    "count": 82,
-    "next": "https://swapi.dev/api/people/?page=2",
-    "previous": null,
-    "results": [
-      ...
-    ]
-}
-```
+    ```json
+    {
+        "count": 82,
+        "next": "https://swapi.dev/api/people/?page=2",
+        "previous": null,
+        "results": [
+          ...
+        ]
+    }
+    ```
 
 - The endpoint `GET /api/planets` returns a JSON response like this:
 
-```json
-{
-    "count": 60,
-    "next": "https://swapi.dev/api/planets/?page=2",
-    "previous": null,
-    "results": [
-        ...
-    ]
-}
-```
+    ```json
+    {
+        "count": 60,
+        "next": "https://swapi.dev/api/planets/?page=2",
+        "previous": null,
+        "results": [
+            ...
+        ]
+    }
+    ```
 
 - From the responses above we understand that all lists are paginated in the same fashion (which is also very common worldwide)
 
@@ -203,6 +190,39 @@ The _manual_ full download is not friendly, because it forces the user to do som
 The _automatic_ full download is not friendly, because it forces the user to wait all the time we avoided with pagination.
 
 If I had to choose, I would implement the automatic download with incremental sort (2.2 above), but I'm not that convinced because it can be confusing for the user to see all that movement in the items of the first page and that's quite a bit of added complexity, which I don't feel comfortable to implement without talking it through before.
+
+
+### About filtering by name
+
+I see that there is a modifier for the `GET /api/people` endpoint which allows to search people by name.
+
+Example: `GET /api/people/?search=sky`
+
+- response
+
+    ```json
+    {
+        "count": 3,
+        "next": null,
+        "previous": null,
+        "results": [
+            {
+                "name": "Luke Skywalker",
+                ...
+            },
+            {
+                "name": "Anakin Skywalker",
+                ...
+            },
+            {
+                "name": "Shmi Skywalker",
+                ...
+            }
+        ]
+    }
+    ```
+
+- Also these results are paginated (as expected)
 
 
 ## Project setup
