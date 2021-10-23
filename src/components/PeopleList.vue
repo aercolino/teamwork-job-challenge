@@ -48,7 +48,7 @@
     <p>
       <button id="PrevPage">PREV</button>
       Page {{ pageNumber }} of {{ pageCount }}
-      <button id="NextPage">NEXT</button>
+      <button @click="nextPage">NEXT</button>
     </p>
   </div>
 </template>
@@ -75,6 +75,11 @@ export default {
     },
     pageCount() {
       return this.$store.state.pagesCount;
+    }
+  },
+  methods: {
+    nextPage() {
+      this.$store.dispatch('navigateToNextPage');
     }
   },
   mounted() {
