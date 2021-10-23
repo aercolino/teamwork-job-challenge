@@ -64,13 +64,17 @@ export default {
   },
   data() {
     return {
-      pageNumber: 3,
-      pageCount: 9,
     }
   },
   computed: {
     people() {
       return this.$store.state.people;
+    },
+    pageNumber() {
+      return this.$store.state.peopleCurrentPage;
+    },
+    pageCount() {
+      return this.$store.state.peoplePagesCount;
     }
   },
   mounted() {
