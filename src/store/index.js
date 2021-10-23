@@ -29,6 +29,7 @@ const getters = {
     return state.people.slice(firstIndex, lastIndex + 1);
   },
   isLastPage: (state) => state.currentPage > 0 && state.currentPage === state.pagesCount,
+  isFirstPage: (state) => state.currentPage === 1,
   isPageAvailable: (state) => (pageNumber) => {
     const {firstIndex, lastIndex} = pageLimits(pageNumber, state.peopleCount);
     return state.people[firstIndex] && state.people[lastIndex];
@@ -76,7 +77,16 @@ const actions = {
     catch (e) {
       console.log('ERROR', e.stack ?? e.message);
     }
-  }
+  },
+  navigateToPrevPage({getters, commit}) {
+    try {
+      if (getters.isFirstPage) return;
+      commit('decrementPage');
+    }
+    catch (e) {
+      console.log('ERROR', e.stack ?? e.message);
+    }
+  },
 };
 
 const store = new Vuex.Store({

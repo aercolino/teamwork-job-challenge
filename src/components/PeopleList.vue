@@ -46,7 +46,7 @@
     </table>
 
     <p>
-      <button id="PrevPage">PREV</button>
+      <button @click="prevPage">PREV</button>
       Page {{ pageNumber }} of {{ pageCount }}
       <button @click="nextPage">NEXT</button>
     </p>
@@ -78,6 +78,9 @@ export default {
     }
   },
   methods: {
+    prevPage() {
+      this.$store.dispatch('navigateToPrevPage');
+    },
     nextPage() {
       this.$store.dispatch('navigateToNextPage');
     }
