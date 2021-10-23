@@ -44,6 +44,12 @@
         </td>
       </tr>
     </table>
+
+    <p>
+      <button id="PrevPage">PREV</button>
+      Page {{ pageNumber }} of {{ pageCount }}
+      <button id="NextPage">NEXT</button>
+    </p>
   </div>
 </template>
 
@@ -59,6 +65,8 @@ export default {
   data() {
     return {
       rows: Array(10).fill(null),
+      pageNumber: 3,
+      pageCount: 9,
     }
   }
 }
