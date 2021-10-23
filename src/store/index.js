@@ -9,22 +9,29 @@ const axios = Axios.create({
 });
 
 
+const PEOPLE_PER_PAGE = 10;
+
 const state = {
   people: [],
-  peopleCurrentPage: 0,
-  peoplePagesCount: 0,
+  currentPage: 0,
+  pagesCount: 0,
 };
 
 const getters = {
-  isLastPage: state => state.peopleCurrentPage > 0 && state.peopleCurrentPage === state.peoplePagesCount,
+  currentPagePeople: state => {
+    const startIncluded = PEOPLE_PER_PAGE * (state.currentPage - 1);
+    const endExcluded = startIncluded + PEOPLE_PER_PAGE;
+    return state.people.slice(startIncluded, endExcluded);
+  },
+  isLastPage: state => state.currentPage > 0 && state.currentPage === state.pagesCount,
 };
 
 const mutations = {
   addPeoplePage(state, {page}) {
     const { results, count } = page;
     state.people = state.people.concat(...results);
-    state.peopleCurrentPage += 1;
-    state.peoplePagesCount = Math.ceil(count / 10);
+    state.currentPage += 1;
+    state.pagesCount = Math.ceil(count / 10);
   },
 };
 
@@ -32,7 +39,7 @@ const actions = {
   async loadNextPageOfPeople({state, getters, commit}) {
     try {
       if (getters.isLastPage) return;
-      const nextPage = state.peopleCurrentPage + 1;
+      const nextPage = state.currentPage + 1;
       const { data: page } = await axios.get(`people/?page=${nextPage}`);
       commit('addPeoplePage', {page});
     }

@@ -68,13 +68,13 @@ export default {
   },
   computed: {
     people() {
-      return this.$store.state.people;
+      return this.$store.getters.currentPagePeople;
     },
     pageNumber() {
-      return this.$store.state.peopleCurrentPage;
+      return this.$store.state.currentPage;
     },
     pageCount() {
-      return this.$store.state.peoplePagesCount;
+      return this.$store.state.pagesCount;
     }
   },
   mounted() {
