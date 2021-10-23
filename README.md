@@ -226,6 +226,16 @@ Example: `GET /api/people/?search=sky`
 - Also these results are paginated (as expected)
 
 
+### Coding
+
+
+#### About vulnerabilities
+
+After installing Axios and Vuex, NPM has detected 47 vulnerabilities (19 moderate, 28 high). See `dev-documents/audit.txt`.
+
+After inspecting that report, I decide to ignore the issue because all of the vulnerabilities only affect dev dependencies.
+
+
 ## Project setup
 
 ```sh
