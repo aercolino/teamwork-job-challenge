@@ -152,6 +152,7 @@ I created the project with `$ vue create andrea-ercolino` and renamed the root f
     ```
 
 - From the responses above we understand that all lists are paginated in the same fashion (which is also very common worldwide)
+- The number of results per page is 10
 
 
 #### About how I'm going to load and display data
