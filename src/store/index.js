@@ -1,58 +1,45 @@
-// import Axios from 'axios';
+import Axios from 'axios';
 import Vuex from 'vuex';
 import Vue from 'vue';
 
 Vue.use(Vuex);
 
-// const axios = Axios.create({
-//   baseURL: 'https://swapi.dev/api/',
-// });
+const axios = Axios.create({
+  baseURL: 'https://swapi.dev/api/',
+});
 
 
 const state = {
-  people: [
-    {
-      "name": "Luke Skywalker",
-      "height": "172",
-      "mass": "77",
-      "hair_color": "blond",
-      "skin_color": "fair",
-      "eye_color": "blue",
-      "birth_year": "19BBY",
-      "gender": "male",
-      "homeworld": "https://swapi.dev/api/planets/1/",
-      "films": [
-        "https://swapi.dev/api/films/1/",
-        "https://swapi.dev/api/films/2/",
-        "https://swapi.dev/api/films/3/",
-        "https://swapi.dev/api/films/6/"
-      ],
-      "species": [],
-      "vehicles": [
-        "https://swapi.dev/api/vehicles/14/",
-        "https://swapi.dev/api/vehicles/30/"
-      ],
-      "starships": [
-        "https://swapi.dev/api/starships/12/",
-        "https://swapi.dev/api/starships/22/"
-      ],
-      "created": "2014-12-09T13:50:51.644000Z",
-      "edited": "2014-12-20T21:17:56.891000Z",
-      "url": "https://swapi.dev/api/people/1/"
-    }
-  ],
+  people: [],
+  peopleCurrentPage: 0,
+  peoplePagesCount: 0,
 };
 
 const getters = {
-
-};
-
-const actions = {
-
+  isLastPage: state => state.peopleCurrentPage > 0 && state.peopleCurrentPage === state.peoplePagesCount,
 };
 
 const mutations = {
+  addPeoplePage(state, {page}) {
+    const { results, count } = page;
+    state.people = state.people.concat(...results);
+    state.peopleCurrentPage += 1;
+    state.peoplePagesCount = Math.ceil(count / 10);
+  },
+};
 
+const actions = {
+  async loadNextPageOfPeople({state, getters, commit}) {
+    try {
+      if (getters.isLastPage) return;
+      const nextPage = state.peopleCurrentPage + 1;
+      const { data: page } = await axios.get(`people/?page=${nextPage}`);
+      commit('addPeoplePage', {page});
+    }
+    catch (e) {
+      console.log('ERROR', e.stack ?? e.message);
+    }
+  },
 };
 
 const store = new Vuex.Store({

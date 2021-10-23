@@ -64,10 +64,17 @@ export default {
   },
   data() {
     return {
-      people: this.$store.state.people,
       pageNumber: 3,
       pageCount: 9,
     }
+  },
+  computed: {
+    people() {
+      return this.$store.state.people;
+    }
+  },
+  mounted() {
+    this.$store.dispatch('loadNextPageOfPeople');
   }
 }
 </script>
