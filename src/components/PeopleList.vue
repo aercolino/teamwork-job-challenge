@@ -23,21 +23,21 @@
           Planet Name
         </th>
       </tr>
-      <tr v-for="i in rows" :key="i">
+      <tr v-for="person in people" :key="person.id">
         <td>
-          Luke Skywalker
+          {{ person.name }}
         </td>
         <td>
-          172
+          {{ person.height }}
         </td>
         <td>
-          77
+          {{ person.mass }}
         </td>
         <td>
-          2014-12-09T13:50:51.644000Z
+          {{ person.created }}
         </td>
         <td>
-          2014-12-20T21:17:56.891000Z
+          {{ person.edited }}
         </td>
         <td>
           <PlanetPopup id="1"/>
@@ -64,7 +64,7 @@ export default {
   },
   data() {
     return {
-      rows: Array(10).fill(null),
+      people: this.$store.state.people,
       pageNumber: 3,
       pageCount: 9,
     }
