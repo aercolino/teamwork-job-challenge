@@ -8,6 +8,7 @@ const axios = Axios.create({
   baseURL: 'https://swapi.dev/api/',
 });
 
+
 const PEOPLE_PER_PAGE = 10;
 
 function pageLimits(pageNumber, peopleCount) {
@@ -16,12 +17,14 @@ function pageLimits(pageNumber, peopleCount) {
   return {firstIndex, lastIndex};
 }
 
+
 const state = {
   people: [],
   peopleCount: 0,
   currentPage: 0,
   pagesCount: 0,
 };
+
 
 const getters = {
   currentPagePeople: (state) => {
@@ -35,6 +38,7 @@ const getters = {
     return state.people[firstIndex] && state.people[lastIndex];
   }
 };
+
 
 const mutations = {
   addPeoplePage(state, {page}) {
@@ -51,6 +55,7 @@ const mutations = {
     state.currentPage -= 1;
   }
 };
+
 
 const actions = {
   async loadNextPageOfPeople({state, getters, commit}) {
@@ -88,6 +93,7 @@ const actions = {
     }
   },
 };
+
 
 const store = new Vuex.Store({
   state,

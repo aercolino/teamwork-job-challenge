@@ -75,7 +75,7 @@ export default {
     },
     pageCount() {
       return this.$store.state.pagesCount;
-    }
+    },
   },
   methods: {
     prevPage() {
@@ -83,7 +83,7 @@ export default {
     },
     nextPage() {
       this.$store.dispatch('navigateToNextPage');
-    }
+    },
   },
   mounted() {
     this.$store.dispatch('loadNextPageOfPeople');
