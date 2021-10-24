@@ -23,7 +23,7 @@
           Planet Name
         </th>
       </tr>
-      <tr v-for="person in people" :key="person.id">
+      <tr v-for="person in people" :key="person.url">
         <td>
           {{ person.name }}
         </td>
