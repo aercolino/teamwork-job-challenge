@@ -40,7 +40,7 @@
           {{ person.edited }}
         </td>
         <td>
-          <PlanetPopup id="1"/>
+          <PlanetPopup :id="person.homeworld"/>
         </td>
       </tr>
     </table>

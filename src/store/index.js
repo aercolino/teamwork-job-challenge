@@ -21,6 +21,7 @@ function pageLimits(pageNumber, peopleCount) {
 const state = {
   people: [],
   peopleCount: 0,
+  planets: {},
   currentPage: 0,
   pagesCount: 0,
 };
@@ -41,6 +42,12 @@ const getters = {
 
 
 const mutations = {
+  addPlanet(state, {planet}) {
+    state.planets = {
+      ...state.planets,
+      [planet.url]: planet,
+    };
+  },
   addPeoplePage(state, {page}) {
     const {results, count} = page;
     state.people = state.people.concat(...results);
@@ -58,6 +65,18 @@ const mutations = {
 
 
 const actions = {
+  async loadPlanetIfMissing({state, commit}, {id: url}) {
+    try {
+      if (!state.planets[url]) {
+        commit('addPlanet', {planet: {url}}); // placeholder to avoid multiple requests for the same url
+        const {data: planet} = await axios.get(url);
+        commit('addPlanet', {planet});
+      }
+    }
+    catch (e) {
+      console.log('ERROR', e.stack ?? e.message);
+    }
+  },
   async loadNextPageOfPeople({state, getters, commit}) {
     try {
       if (getters.isLastPage) return;
