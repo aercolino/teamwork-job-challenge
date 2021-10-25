@@ -31,7 +31,7 @@
               Diameter
             </th>
             <td>
-              {{ planet.diameter }}
+              {{ planet.diameter | formatted }}
             </td>
           </tr>
           <tr>
@@ -47,7 +47,7 @@
               Population
             </th>
             <td>
-              {{ planet.population }}
+              {{ planet.population | inMegas }}
             </td>
           </tr>
           <tr>
@@ -77,6 +77,8 @@
 <script>
 import Modal from "./Modal.vue";
 
+const formatter = new Intl.NumberFormat('en-US');
+
 export default {
   props: ["id"],
   components: {
@@ -86,6 +88,18 @@ export default {
     return {
       isModalVisible: false,
     };
+  },
+  filters: {
+    formatted(quantity = 0) {
+      const result = formatter.format(quantity);
+      return result;
+    },
+    inMegas(quantity = 0) {
+      const kilos = Math.round(quantity / 1000);
+      const megas = kilos / 1000;
+      const result = formatter.format(megas);
+      return `${result} M`;
+    },
   },
   computed: {
     planet() {
