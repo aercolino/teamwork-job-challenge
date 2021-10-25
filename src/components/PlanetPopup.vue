@@ -83,6 +83,10 @@ import Modal from "./Modal.vue";
 
 const numberFormatter = new Intl.NumberFormat("en-US");
 
+function isDecimalNumber(number) {
+  return /^\d+(?:\.\d+)?$/.test(number);
+}
+
 export default {
   props: ["id"],
   components: {
@@ -95,10 +99,13 @@ export default {
   },
   filters: {
     asNumber(quantity = 0) {
+      if (!isDecimalNumber(quantity)) return quantity;
       const result = numberFormatter.format(quantity);
       return result;
     },
     inMegas(quantity = 0) {
+      if (!isDecimalNumber(quantity)) return quantity;
+      if (quantity < 1000) return quantity;
       const kilos = Math.round(quantity / 1000);
       const megas = kilos / 1000;
       const result = numberFormatter.format(megas);
