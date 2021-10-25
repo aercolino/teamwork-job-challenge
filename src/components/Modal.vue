@@ -37,14 +37,6 @@
           <slot name="footer">
             This is the default footer!
           </slot>
-          <button
-            type="button"
-            class="btn-green"
-            @click="close"
-            aria-label="Close modal"
-          >
-            Close me!
-          </button>
         </footer>
       </div>
     </div>
@@ -120,13 +112,6 @@ export default {
   font-weight: bold;
   color: #4aae9b;
   background: transparent;
-}
-
-.btn-green {
-  color: white;
-  background: #4aae9b;
-  border: 1px solid #4aae9b;
-  border-radius: 2px;
 }
 
 .modal-fade-enter,
