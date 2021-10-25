@@ -11,7 +11,10 @@
           class="modal-header"
           id="modalTitle"
         >
-          <slot name="header">
+          <slot
+            name="header"
+            v-if="hasHeader"
+          >
             This is the default tile!
           </slot>
           <button
@@ -27,13 +30,17 @@
         <section
           class="modal-body"
           id="modalDescription"
+          v-if="hasBody"
         >
           <slot name="body">
             This is the default body!
           </slot>
         </section>
 
-        <footer class="modal-footer">
+        <footer
+          class="modal-footer"
+          v-if="hasFooter"
+        >
           <slot name="footer">
             This is the default footer!
           </slot>
@@ -48,6 +55,17 @@
 // https://www.digitalocean.com/community/tutorials/vuejs-vue-modal-component
 export default {
   name: "Modal",
+  computed: {
+    hasHeader() {
+      return !!this.$slots.header;
+    },
+    hasBody() {
+      return !!this.$slots.body;
+    },
+    hasFooter() {
+      return !!this.$slots.footer;
+    },
+  },
   methods: {
     close() {
       this.$emit("close");
