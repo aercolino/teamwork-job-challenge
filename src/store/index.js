@@ -34,7 +34,7 @@ const state = {
 };
 
 
-const getters = {
+export const getters = {
   currentPagePeople: (state) => {
     const {firstIndex, lastIndex} = pageLimits(state.currentPage, state.peopleCount);
     return state.people.slice(firstIndex, lastIndex + 1);
@@ -48,7 +48,7 @@ const getters = {
 };
 
 
-const mutations = {
+export const mutations = {
   addPlanet(state, {planet}) {
     state.planets = {
       ...state.planets,
@@ -77,7 +77,7 @@ const mutations = {
 };
 
 
-const actions = {
+export const actions = {
   async loadPlanetIfMissing({state, commit}, {id: url}) {
     try {
       if (!state.planets[url]) {
@@ -128,13 +128,10 @@ const actions = {
 };
 
 
-const store = new Vuex.Store({
+export default new Vuex.Store({
   state,
   getters,
   actions,
   mutations,
   strict: true
-})
-
-
-export default store;
+});
