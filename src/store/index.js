@@ -11,6 +11,10 @@ const axios = Axios.create({
 
 const PEOPLE_PER_PAGE = 10;
 
+function pagesCount({peopleCount}) {
+  return Math.ceil(peopleCount / PEOPLE_PER_PAGE);
+}
+
 function pageLimits(pageNumber, peopleCount) {
   const firstIndex = PEOPLE_PER_PAGE * (pageNumber - 1);
   const lastIndex = Math.min(firstIndex + PEOPLE_PER_PAGE - 1, peopleCount - 1);
@@ -59,8 +63,8 @@ export const mutations = {
     const {results, count} = page;
     state.people = state.people.concat(...results);
     state.currentPage += 1;
-    state.pagesCount = Math.ceil(count / PEOPLE_PER_PAGE);
     state.peopleCount = count;
+    state.pagesCount = pagesCount(state);
   },
   incrementPage(state) {
     state.currentPage += 1;
