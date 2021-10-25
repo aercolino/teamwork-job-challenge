@@ -15,7 +15,7 @@ function pagesCount({peopleCount}) {
   return Math.ceil(peopleCount / PEOPLE_PER_PAGE);
 }
 
-function pageLimits(pageNumber, peopleCount) {
+function pageLimits({peopleCount}, pageNumber) {
   const firstIndex = PEOPLE_PER_PAGE * (pageNumber - 1);
   const lastIndex = Math.min(firstIndex + PEOPLE_PER_PAGE - 1, peopleCount - 1);
   return {firstIndex, lastIndex};
@@ -40,13 +40,13 @@ const state = {
 
 export const getters = {
   currentPagePeople: (state) => {
-    const {firstIndex, lastIndex} = pageLimits(state.currentPage, state.peopleCount);
+    const {firstIndex, lastIndex} = pageLimits(state, state.currentPage);
     return state.people.slice(firstIndex, lastIndex + 1);
   },
   isLastPage: (state) => state.currentPage > 0 && state.currentPage === state.pagesCount,
   isFirstPage: (state) => state.currentPage === 1,
   isPageAvailable: (state) => (pageNumber) => {
-    const {firstIndex, lastIndex} = pageLimits(pageNumber, state.peopleCount);
+    const {firstIndex, lastIndex} = pageLimits(state, pageNumber);
     return state.people[firstIndex] && state.people[lastIndex];
   }
 };
