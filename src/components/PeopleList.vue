@@ -1,7 +1,7 @@
 <template>
   <div id="PeopleList">
     <h1>List of Star Wars People ({{ peopleResults }})</h1>
-    <input type="text" id="search" placeholder="Search" @keyup.enter="search">
+    <input class="search" type="text" placeholder="Search" @keyup.enter="search" v-model="searchQuery">
     <table width="100%">
       <tr>
         <th width="20%">
@@ -62,6 +62,11 @@ export default {
   components: {
     PlanetPopup,
   },
+  data() {
+    return {
+      searchQuery: '',
+    };
+  },
   computed: {
     people() {
       return this.$store.getters.currentPagePeople;
@@ -84,8 +89,7 @@ export default {
       this.$store.dispatch('navigateToNextPage');
     },
     search() {
-      const query = document.querySelector('#search').value;
-      this.$store.commit('setPeopleQuery', {query});
+      this.$store.commit('setPeopleQuery', {query: this.searchQuery});
       this.$store.dispatch('loadNextPageOfPeople');
     },
   },
@@ -101,7 +105,7 @@ export default {
   font-size: 14px;
 }
 
-#search {
+input.search {
   margin-bottom: 15px;
 }
 
