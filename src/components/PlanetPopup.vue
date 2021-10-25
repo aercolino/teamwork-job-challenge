@@ -44,7 +44,7 @@
           </tr>
           <tr>
             <th>
-              Popultion
+              Population
             </th>
             <td>
               {{ planet.population }}
