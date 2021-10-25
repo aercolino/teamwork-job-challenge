@@ -98,7 +98,7 @@ export default {
 
 .modal-header,
 .modal-footer {
-  padding: 15px;
+  padding: 10px;
   display: flex;
 }
 
