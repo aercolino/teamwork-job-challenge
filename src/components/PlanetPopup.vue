@@ -35,7 +35,7 @@
               Diameter
             </th>
             <td>
-              {{ planet.diameter | formatted }}
+              {{ planet.diameter | asNumber }}
             </td>
           </tr>
           <tr>
@@ -59,7 +59,7 @@
               Created
             </th>
             <td>
-              {{ planet.created }}
+              {{ planet.created | asLogTime }}
             </td>
           </tr>
           <tr>
@@ -67,7 +67,7 @@
               Edited
             </th>
             <td>
-              {{ planet.edited }}
+              {{ planet.edited | asLogTime }}
             </td>
           </tr>
         </table>
@@ -81,7 +81,7 @@
 <script>
 import Modal from "./Modal.vue";
 
-const formatter = new Intl.NumberFormat("en-US");
+const numberFormatter = new Intl.NumberFormat("en-US");
 
 export default {
   props: ["id"],
@@ -94,14 +94,20 @@ export default {
     };
   },
   filters: {
-    formatted(quantity = 0) {
-      const result = formatter.format(quantity);
+    asNumber(quantity = 0) {
+      const result = numberFormatter.format(quantity);
       return result;
+    },
+    asLogTime(isoTime = '') {
+      if (!isoTime) return;
+      // 2014-12-10T11:35:48.479000Z -> 2014-12-10 11:35 GMT
+      const upToMinutes = isoTime.substr(0, 16).replace('T', ' ');
+      return `${upToMinutes} GMT`;
     },
     inMegas(quantity = 0) {
       const kilos = Math.round(quantity / 1000);
       const megas = kilos / 1000;
-      const result = formatter.format(megas);
+      const result = numberFormatter.format(megas);
       return `${result} M`;
     },
   },
