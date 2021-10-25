@@ -1,7 +1,7 @@
 <template>
   <div id="PeopleList">
     <h1>List of Star Wars People</h1>
-
+    <input type="text" id="search" placeholder="Search" @keyup.enter="search">
     <table width="100%">
       <tr>
         <th width="20%">
@@ -84,6 +84,11 @@ export default {
     nextPage() {
       this.$store.dispatch('navigateToNextPage');
     },
+    search() {
+      const query = document.querySelector('#search').value;
+      this.$store.commit('setPeopleQuery', {query});
+      this.$store.dispatch('loadNextPageOfPeople');
+    },
   },
   mounted() {
     this.$store.dispatch('loadNextPageOfPeople');
@@ -95,6 +100,10 @@ export default {
 <style scoped>
 #PeopleList {
   font-size: 14px;
+}
+
+#search {
+  margin-bottom: 15px;
 }
 
 table {

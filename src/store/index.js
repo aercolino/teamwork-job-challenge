@@ -17,13 +17,20 @@ function pageLimits(pageNumber, peopleCount) {
   return {firstIndex, lastIndex};
 }
 
+function emptyPeople() {
+  return {
+    people: [],
+    peopleCount: 0,
+    currentPage: 0,
+    pagesCount: 0, 
+  };
+}
+
 
 const state = {
-  people: [],
-  peopleCount: 0,
+  ...emptyPeople(),
   planets: {},
-  currentPage: 0,
-  pagesCount: 0,
+  peopleQuery: '',
 };
 
 
@@ -60,7 +67,13 @@ const mutations = {
   },
   decrementPage(state) {
     state.currentPage -= 1;
-  }
+  },
+  setPeopleQuery(state, {query}) {
+    const cleanQuery = query.trim();
+    if (cleanQuery === state.peopleQuery) return;
+    Object.assign(state, emptyPeople());
+    state.peopleQuery = cleanQuery;
+  },
 };
 
 
@@ -81,7 +94,8 @@ const actions = {
     try {
       if (getters.isLastPage) return;
       const nextPage = state.currentPage + 1;
-      const {data: page} = await axios.get(`people/?page=${nextPage}`);
+      const encodeQuery = encodeURIComponent(state.peopleQuery);
+      const {data: page} = await axios.get(`people/?search=${encodeQuery}&page=${nextPage}`);
       commit('addPeoplePage', {page});
     }
     catch (e) {
