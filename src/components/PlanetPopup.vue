@@ -1,18 +1,75 @@
 <template>
   <div>
-    {{ planetName }}
     <button
       type="button"
       class="btn"
       @click="showModal"
     >
-      Open Modal!
+      {{ planetName }}
     </button>
 
     <Modal
       v-show="isModalVisible"
       @close="closeModal"
-    />
+      v-if="planet"
+    >
+      <template v-slot:header>
+        <span class="header">{{ planet.name }}</span>
+      </template>
+      <template v-slot:body>
+        <table width="100%">
+          <tr>
+            <th>
+              Name
+            </th>
+            <td>
+              {{ planet.name }}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Diameter
+            </th>
+            <td>
+              {{ planet.diameter }}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Climate
+            </th>
+            <td>
+              {{ planet.climate }}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Popultion
+            </th>
+            <td>
+              {{ planet.population }}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Created
+            </th>
+            <td>
+              {{ planet.created }}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Edited
+            </th>
+            <td>
+              {{ planet.edited }}
+            </td>
+          </tr>
+        </table>
+      </template>
+      <template v-slot:footer />
+    </Modal>
   </div>
 </template>
 
@@ -54,4 +111,8 @@ export default {
 
 
 <style scoped>
+.header {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
 </style>
