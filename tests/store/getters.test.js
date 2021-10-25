@@ -33,7 +33,7 @@ const SOME_PEOPLE = {
 describe('getters', () => {
 
   describe('currentPagePeople', () => {
-    it('does not throw for no people', () => {
+    it('does not throw when there is no people', () => {
       const state = {
         people: [],
         peopleCount: 0,
@@ -97,6 +97,29 @@ describe('getters', () => {
         {name:'Fulanito 5'},
         {name:'Jaimito 5'},
       ]);
+    });
+  });
+
+  describe('isPageAvailable', () => {
+    it('does not throw when there is no people', () => {
+      const state = {
+        people: [],
+        peopleCount: 0,
+        currentPage: 0,
+      };
+      expect(() => getters.isPageAvailable(state)(1)).not.toThrow();
+    });
+
+    it('works', () => {
+      const state = {
+        ...SOME_PEOPLE,
+        currentPage: 1,
+      };
+      expect(getters.isPageAvailable(state)(0)).toBeFalsy();
+      expect(getters.isPageAvailable(state)(1)).toBeTruthy();
+      expect(getters.isPageAvailable(state)(2)).toBeTruthy();
+      expect(getters.isPageAvailable(state)(3)).toBeTruthy();
+      expect(getters.isPageAvailable(state)(4)).toBeFalsy();
     });
   });
 
