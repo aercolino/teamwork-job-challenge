@@ -62,10 +62,6 @@ export default {
   components: {
     PlanetPopup,
   },
-  data() {
-    return {
-    }
-  },
   computed: {
     people() {
       return this.$store.getters.currentPagePeople;
