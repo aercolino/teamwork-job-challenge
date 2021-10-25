@@ -4,9 +4,13 @@
       type="button"
       class="btn"
       @click="showModal"
+      v-if="planetName !== 'Loading...' && planetName !== 'unknown'"
     >
       {{ planetName }}
     </button>
+    <template v-else>
+      {{ planetName }}
+    </template>
 
     <Modal
       v-show="isModalVisible"
@@ -77,7 +81,7 @@
 <script>
 import Modal from "./Modal.vue";
 
-const formatter = new Intl.NumberFormat('en-US');
+const formatter = new Intl.NumberFormat("en-US");
 
 export default {
   props: ["id"],
