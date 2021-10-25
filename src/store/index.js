@@ -59,7 +59,7 @@ const mutations = {
     const {results, count} = page;
     state.people = state.people.concat(...results);
     state.currentPage += 1;
-    state.pagesCount = Math.ceil(count / 10);
+    state.pagesCount = Math.ceil(count / PEOPLE_PER_PAGE);
     state.peopleCount = count;
   },
   incrementPage(state) {
