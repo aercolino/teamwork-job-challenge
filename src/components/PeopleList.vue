@@ -34,10 +34,10 @@
           {{ person.mass }}
         </td>
         <td>
-          {{ person.created }}
+          {{ person.created | asLogTime }}
         </td>
         <td>
-          {{ person.edited }}
+          {{ person.edited | asLogTime }}
         </td>
         <td>
           <PlanetPopup :id="person.homeworld"/>

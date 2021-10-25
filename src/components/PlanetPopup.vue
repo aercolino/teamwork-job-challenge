@@ -98,12 +98,6 @@ export default {
       const result = numberFormatter.format(quantity);
       return result;
     },
-    asLogTime(isoTime = '') {
-      if (!isoTime) return;
-      // 2014-12-10T11:35:48.479000Z -> 2014-12-10 11:35 GMT
-      const upToMinutes = isoTime.substr(0, 16).replace('T', ' ');
-      return `${upToMinutes} GMT`;
-    },
     inMegas(quantity = 0) {
       const kilos = Math.round(quantity / 1000);
       const megas = kilos / 1000;
