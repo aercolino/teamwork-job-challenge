@@ -28,7 +28,6 @@ const SOME_PEOPLE = {
     {name:'Jaimito 5'},
 ],
   peopleCount: 24,
-  pagesCount: 3,
 }
 
 describe('getters', () => {
@@ -39,7 +38,6 @@ describe('getters', () => {
         people: [],
         peopleCount: 0,
         currentPage: 0,
-        pagesCount: 0,
       };
       expect(() => getters.currentPagePeople(state)).not.toThrow();
     });

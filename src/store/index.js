@@ -26,7 +26,6 @@ function emptyPeople() {
     people: [],
     peopleCount: 0,
     currentPage: 0,
-    pagesCount: 0, 
   };
 }
 
@@ -39,11 +38,12 @@ const state = {
 
 
 export const getters = {
+  pagesCount,
   currentPagePeople: (state) => {
     const {firstIndex, lastIndex} = pageLimits(state, state.currentPage);
     return state.people.slice(firstIndex, lastIndex + 1);
   },
-  isLastPage: (state) => state.currentPage > 0 && state.currentPage === state.pagesCount,
+  isLastPage: (state) => state.currentPage > 0 && state.currentPage === pagesCount(state),
   isFirstPage: (state) => state.currentPage === 1,
   isPageAvailable: (state) => (pageNumber) => {
     const {firstIndex, lastIndex} = pageLimits(state, pageNumber);
@@ -64,7 +64,6 @@ export const mutations = {
     state.people = state.people.concat(...results);
     state.currentPage += 1;
     state.peopleCount = count;
-    state.pagesCount = pagesCount(state);
   },
   incrementPage(state) {
     state.currentPage += 1;

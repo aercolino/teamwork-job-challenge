@@ -84,7 +84,7 @@ export default {
       return this.$store.state.currentPage;
     },
     pageCount() {
-      return this.$store.state.pagesCount;
+      return this.$store.getters.pagesCount;
     },
     peopleResults() {
       return this.$store.state.peopleQuery
