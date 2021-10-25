@@ -1,6 +1,6 @@
 <template>
   <div id="PeopleList">
-    <h1>List of Star Wars People</h1>
+    <h1>List of Star Wars People ({{ peopleResults }})</h1>
     <input type="text" id="search" placeholder="Search" @keyup.enter="search">
     <table width="100%">
       <tr>
@@ -75,6 +75,9 @@ export default {
     },
     pageCount() {
       return this.$store.state.pagesCount;
+    },
+    peopleResults() {
+      return this.$store.state.peopleQuery ? `named like *${this.$store.state.peopleQuery}*` : 'all';
     },
   },
   methods: {
