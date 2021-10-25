@@ -1,6 +1,6 @@
 <template>
   <div id="PeopleList">
-    <h1>List of Star Wars Peolple</h1>
+    <h1>List of Star Wars People</h1>
 
     <table width="100%">
       <tr>
