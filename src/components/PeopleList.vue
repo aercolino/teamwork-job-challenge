@@ -1,7 +1,13 @@
 <template>
   <div id="PeopleList">
     <h1>List of Star Wars People ({{ peopleResults }})</h1>
-    <input class="search" type="text" placeholder="Search" @keyup.enter="search" v-model="searchQuery">
+    <input
+      class="search"
+      type="text"
+      placeholder="Search"
+      @keyup.enter="search"
+      v-model="searchQuery"
+    >
     <table width="100%">
       <tr>
         <th width="20%">
@@ -23,7 +29,10 @@
           Planet Name
         </th>
       </tr>
-      <tr v-for="person in people" :key="person.url">
+      <tr
+        v-for="person in people"
+        :key="person.url"
+      >
         <td>
           {{ person.name }}
         </td>
@@ -40,7 +49,7 @@
           {{ person.edited | asLogTime }}
         </td>
         <td>
-          <PlanetPopup :id="person.homeworld"/>
+          <PlanetPopup :id="person.homeworld" />
         </td>
       </tr>
     </table>
@@ -55,16 +64,16 @@
 
 
 <script>
-import PlanetPopup from './PlanetPopup';
+import PlanetPopup from "./PlanetPopup";
 
 export default {
-  name: 'PeopleList',
+  name: "PeopleList",
   components: {
     PlanetPopup,
   },
   data() {
     return {
-      searchQuery: '',
+      searchQuery: "",
     };
   },
   computed: {
@@ -78,25 +87,27 @@ export default {
       return this.$store.state.pagesCount;
     },
     peopleResults() {
-      return this.$store.state.peopleQuery ? `named like *${this.$store.state.peopleQuery}*` : 'all';
+      return this.$store.state.peopleQuery
+        ? `named like *${this.$store.state.peopleQuery}*`
+        : "all";
     },
   },
   methods: {
     prevPage() {
-      this.$store.dispatch('navigateToPrevPage');
+      this.$store.dispatch("navigateToPrevPage");
     },
     nextPage() {
-      this.$store.dispatch('navigateToNextPage');
+      this.$store.dispatch("navigateToNextPage");
     },
     search() {
-      this.$store.commit('setPeopleQuery', {query: this.searchQuery});
-      this.$store.dispatch('loadNextPageOfPeople');
+      this.$store.commit("setPeopleQuery", { query: this.searchQuery });
+      this.$store.dispatch("loadNextPageOfPeople");
     },
   },
   mounted() {
-    this.$store.dispatch('loadNextPageOfPeople');
-  }
-}
+    this.$store.dispatch("loadNextPageOfPeople");
+  },
+};
 </script>
 
 
@@ -113,7 +124,8 @@ table {
   border-collapse: collapse;
 }
 
-td, th {
+td,
+th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 14px 21px;
