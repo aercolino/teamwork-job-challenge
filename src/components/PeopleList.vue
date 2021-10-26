@@ -1,64 +1,67 @@
 <template>
   <div id="PeopleList">
     <h1>List of Star Wars People ({{ peopleResults }})</h1>
-    <input
-      class="search"
-      type="text"
-      placeholder="Search"
-      @keyup.enter="search"
-      v-model="searchQuery"
-    >
-    <table width="100%">
-      <tr>
-        <th width="20%">
-          Name
-        </th>
-        <th width="10%">
-          Height
-        </th>
-        <th width="10%">
-          Mass
-        </th>
-        <th width="20%">
-          Created
-        </th>
-        <th width="20%">
-          Edited
-        </th>
-        <th width="20%">
-          Planet Name
-        </th>
-      </tr>
-      <tr
-        v-for="person in people"
-        :key="person.url"
+    <div v-if="loading">L O A D I N G</div>
+    <template v-else>
+      <input
+        class="search"
+        type="text"
+        placeholder="Search"
+        @keyup.enter="search"
+        v-model="searchQuery"
       >
-        <td>
-          {{ person.name }}
-        </td>
-        <td>
-          {{ person.height }}
-        </td>
-        <td>
-          {{ person.mass }}
-        </td>
-        <td>
-          {{ person.created | asLogTime }}
-        </td>
-        <td>
-          {{ person.edited | asLogTime }}
-        </td>
-        <td>
-          <PlanetPopup :id="person.homeworld" />
-        </td>
-      </tr>
-    </table>
+      <table width="100%">
+        <tr>
+          <th width="20%">
+            Name
+          </th>
+          <th width="10%">
+            Height
+          </th>
+          <th width="10%">
+            Mass
+          </th>
+          <th width="20%">
+            Created
+          </th>
+          <th width="20%">
+            Edited
+          </th>
+          <th width="20%">
+            Planet Name
+          </th>
+        </tr>
+        <tr
+          v-for="person in people"
+          :key="person.url"
+        >
+          <td>
+            {{ person.name }}
+          </td>
+          <td>
+            {{ person.height }}
+          </td>
+          <td>
+            {{ person.mass }}
+          </td>
+          <td>
+            {{ person.created | asLogTime }}
+          </td>
+          <td>
+            {{ person.edited | asLogTime }}
+          </td>
+          <td>
+            <PlanetPopup :id="person.homeworld" />
+          </td>
+        </tr>
+      </table>
 
-    <p>
-      <button @click="prevPage">PREV</button>
-      Page {{ pageNumber }} of {{ pageCount }}
-      <button @click="nextPage">NEXT</button>
-    </p>
+      <p>
+        <button @click="prevPage">PREV</button>
+        Page {{ pageNumber }} of {{ pageCount }}
+        <button @click="nextPage">NEXT</button>
+      </p>
+    </template>
   </div>
 </template>
 
@@ -73,6 +76,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       searchQuery: "",
     };
   },
@@ -104,8 +108,10 @@ export default {
       this.$store.dispatch("loadNextPageOfPeople");
     },
   },
-  mounted() {
-    this.$store.dispatch("loadNextPageOfPeople");
+  async mounted() {
+    this.loading = true;
+    await this.$store.dispatch("loadNextPageOfPeople");
+    this.loading = false;
   },
 };
 </script>
