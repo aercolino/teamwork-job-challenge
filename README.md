@@ -229,11 +229,34 @@ Example: `GET /api/people/?search=sky`
 ### Coding
 
 
-#### About vulnerabilities
+#### About NPM vulnerabilities
 
 After installing Axios and Vuex, NPM has detected 47 vulnerabilities (19 moderate, 28 high). See `dev-documents/audit.txt`.
 
 After inspecting that report, I decide to ignore the issue because all of the vulnerabilities only affect dev dependencies.
+
+
+### Testing
+
+
+#### Store
+
+I wrote (and passed) all the tests that I wanted to write, except 4 tests that I left as TODO.
+
+
+#### Components
+
+I had installed some packages to help me tests my components.
+
+```json
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/vue": "^5.8.2",
+    "@vue/vue2-jest": "^27.0.0-alpha.2",
+```
+
+Eventually I decided to not test them.
+
+While I see the need for testing components if I was to release them, here it would make much more sense to test the app E2E.
 
 
 ## Project setup
