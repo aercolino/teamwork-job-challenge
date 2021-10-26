@@ -4,7 +4,7 @@ import Vue from 'vue';
 
 Vue.use(Vuex);
 
-const axios = Axios.create({
+export const axios = Axios.create({
   baseURL: 'https://swapi.dev/api/',
 });
 
@@ -77,6 +77,13 @@ export const mutations = {
     Object.assign(state, emptyPeople());
     state.peopleQuery = cleanQuery;
   },
+  reset(state) {
+    Object.assign(state, {
+      ...emptyPeople(),
+      planets: {},
+      peopleQuery: '',
+    });
+  }
 };
 
 
