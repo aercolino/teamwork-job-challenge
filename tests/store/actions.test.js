@@ -34,7 +34,7 @@ describe('actions', () => {
     });
   });
 
-  describe('loadNextPageOfPeople', () => {
+  describe('navigation', () => {
     const page1 = {
       "count": 14,
       "next": "https://swapi.dev/api/people/?search=&page=2",
@@ -64,7 +64,7 @@ describe('actions', () => {
       ]
     };
     
-    it('works', async () => {
+    it('loadNextPageOfPeople', async () => {
       // first page
       const mockGet1 = jest.fn();
       mockGet1.mockResolvedValue({data: page1});
@@ -89,6 +89,16 @@ describe('actions', () => {
       expect(store.state.people).toEqual(expect.arrayContaining(page1.results)); // first page keeps being there
       expect(store.state.people).toEqual(expect.arrayContaining(page2.results)); // second page keeps being there
       expect(mockGet4.mock.calls.length).toBe(0); // no other page is downloaded
+    });
+
+    describe('navigateToNextPage', () => {
+      it.todo('should go forward, from a page before the last');
+      it.todo('should not go forward, from the last page');
+    });
+
+    describe('navigateToPrevPage', () => {
+      it.todo('should go backward, from a page after the first');
+      it.todo('should not go backward, from the first page');
     });
   });
 
