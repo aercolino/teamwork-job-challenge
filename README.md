@@ -265,14 +265,30 @@ While I see the need for testing components if I was to release them, here it wo
 npm install
 ```
 
+
 ### Compiles and hot-reloads for development
 
 ```sh
 npm run serve
 ```
 
+
 ### Compiles and minifies for production
 
 ```sh
 npm run build
+```
+
+
+### Linting
+
+```sh
+npm run lint
+```
+
+
+### Testing
+
+```sh
+npm run test
 ```
