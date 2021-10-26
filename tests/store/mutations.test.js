@@ -15,7 +15,7 @@ const SOME_PEOPLE = {
   ],
   peopleCount: 24,
   currentPage: 1,
-}
+};
 
 describe('mutations', () => {
   it('addPlanet', () => {
