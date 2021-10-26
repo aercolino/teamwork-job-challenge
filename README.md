@@ -236,6 +236,32 @@ After installing Axios and Vuex, NPM has detected 47 vulnerabilities (19 moderat
 After inspecting that report, I decide to ignore the issue because all of the vulnerabilities only affect dev dependencies.
 
 
+### Result
+
+Here are a couple of screenshots.
+
+
+#### Looking at a planet
+
+Notice:
+
+- _Page 3 of 9_
+- _Population_ is expressed in millions
+- _Diameter_ is localized to en-US
+- _Created_, _Edited_ are formatted
+
+![bespin](./dev-documents/Screenshot%202021-10-25%20at%2013.19.10.png)
+
+
+#### Searching for \*la\*
+
+Notice:
+
+- _Search_ contains _lars_ but the results are for _la_
+
+![query_la](./dev-documents/Screenshot%202021-10-25%20at%2013.30.18.png)
+
+
 ### Testing
 
 
