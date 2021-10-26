@@ -70,7 +70,7 @@ describe('actions', () => {
       mockGet1.mockResolvedValue({data: page1});
       axios.get = mockGet1;
       await store.dispatch('loadNextPageOfPeople');
-      expect(store.state.people).toEqual(expect.arrayContaining(page1.results));
+      expect(store.state.people).toEqual(expect.arrayContaining(page1.results)); // first page is added
       expect(store.state.currentPage).toBe(1);
 
       // second page
@@ -79,7 +79,7 @@ describe('actions', () => {
       axios.get = mockGet2;
       await store.dispatch('loadNextPageOfPeople');
       expect(store.state.people).toEqual(expect.arrayContaining(page1.results)); // first page keeps being there
-      expect(store.state.people).toEqual(expect.arrayContaining(page2.results));
+      expect(store.state.people).toEqual(expect.arrayContaining(page2.results)); // second page is added
       expect(store.state.currentPage).toBe(2);
 
       // no more pages
